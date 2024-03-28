@@ -12,7 +12,7 @@ type Props = {
 
 LR.registerBlocks(LR);
 
-const UploadCare = ({onUpload}: Props) => {
+const UploadCare = ({ onUpload }: Props) => {
     const router = useRouter();
     const ctxProviderRef = useRef<typeof UploadCtxProvider.prototype & UploadCtxProvider>(null)
     useEffect(() => {

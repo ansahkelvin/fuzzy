@@ -8,6 +8,18 @@ const Settings = async () => {
     if(!authUser) return null;
 
     const user =await db.user.findUnique({where: {clerkId: authUser.id}});
+
+    const updateUserInfo = async (name: string) => {
+        'use server'
+         await db.user.update({
+            where: {
+                clerkId: authUser.id
+            },
+            data: {
+                name: name
+            }
+        })
+    }
     const removeProfileImage = async () => {
         'use server'
         return db.user.update(
@@ -48,7 +60,9 @@ const Settings = async () => {
                             userImage={user?.profileImage || ''}
                             onUpload={uploadProfileImage}>
             </ProfilePicture>
-            <ProfileForm/>
+            <ProfileForm
+                user={user}
+                onUpdate={updateUserInfo}/>
         </div>
     </div>
 }
